@@ -33,13 +33,19 @@ class View:
     def load_interface(self):
         """ Crea e aggiunge gli elementi di UI alla pagina e la aggiorna. """
         # --- Sezione 1: Intestazione ---
-        self.txt_titolo = ft.Text(value="Musei di Torino", size=38, weight=ft.FontWeight.BOLD)
+        self.txt_titolo = ft.Text(value="Musei di Torino", size=38, weight=ft.FontWeight.BOLD, text_align= ft.TextAlign.CENTER)
 
         # --- Sezione 2: Filtraggio ---
         # TODO
+        self.dd_museo = ft.Dropdown(label = " Museo",options=[], width=300, hint_text="Seleziona un museo", on_change= self.controller.handler_dropdown_museo)
+        self.controller.popola_dropdown_museo()
+        self.dd_epoca = ft.Dropdown(label = "Epoca", options=[],width=300, hint_text="Seleziona un'epoca", on_change= self.controller.handler_dropdown_epoca)
+        self.controller.popola_dropdown_epoca()
 
         # Sezione 3: Artefatti
         # TODO
+        btn_mostra_artefatti = ft.ElevatedButton(text="Mostra Artefatti", on_click=self.controller.mostra_artefatti)
+        self.txt_lista_artefatti = ft.Column()
 
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
@@ -54,9 +60,12 @@ class View:
 
             # Sezione 2: Filtraggio
             # TODO
-
+            ft.Row(controls =[self.dd_museo, self.dd_epoca],alignment=ft.MainAxisAlignment.CENTER,spacing = 20),
+            btn_mostra_artefatti,
+            ft.Divider(),
             # Sezione 3: Artefatti
             # TODO
+            self.txt_lista_artefatti
         )
 
         self.page.scroll = "adaptive"
