@@ -25,10 +25,11 @@ class Controller:
             if not musei:
                 self._view.show_alert('Museo non trovato')
                 return
-            opzioni = [ft.dropdown.Option("Nessun filtro",  "NESSUN_FILTRO")]
+            opzioni = [ft.dropdown.Option("Nessun_filtro",  "Nessun Filtro")]
             for m in musei:
-                opzioni.append(ft.dropdown.Option(m.nome))
+                opzioni.append(ft.dropdown.Option(text=m.nome,key = m.nome))
             self._view.dd_museo.options = opzioni
+            self._view.dd_museo.value = "Nessun_filtro"
             self._view.update()
         except Exception as e:
             self._view.show_alert(f"Errore nel caricamento dei musei: {e}")
@@ -39,10 +40,11 @@ class Controller:
             if not epoche:
                 self._view.show_alert('Nessuna epoca trovata')
                 return
-            opzioni = [ft.dropdown.Option("Nessun filtro",  "NESSUN_FILTRO")]
+            opzioni = [ft.dropdown.Option("Nessun_filtro",  "Nessun Filtro")]
             for e in epoche:
-                opzioni.append(ft.dropdown.Option(e))
+                opzioni.append(ft.dropdown.Option(text=e,key=e))
             self._view.dd_epoca.options = opzioni
+            self._view.dd_epoca.value = "Nessun_filtro"
             self._view.update()
         except Exception as e:
             self._view.show_alert(f"Errore nel caricamento delle epoche: {e}")
@@ -50,13 +52,13 @@ class Controller:
     # CALLBACKS DROPDOWN
     # TODO
     def handler_dropdown_museo(self,e):
-        if e.control.value == "NESSUN_FILTRO":
+        if e.control.value == "Nessun_filtro":
             self.museo_selezionato = None
         else:
             self.museo_selezionato = e.control.value
 
     def handler_dropdown_epoca(self,e):
-        if e.control.value == "NESSUN_FILTRO":
+        if e.control.value == "Nessun_filtro":
             self.epoca_selezionata = None
         else:
             self.epoca_selezionata = e.control.value

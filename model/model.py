@@ -27,18 +27,15 @@ class Model:
         for m in musei:
             museo_id_nome[m.id] = m.nome
         for a in artefatti:
-            value = True # variabile casuale inizializzata a true
+            museo_nome = museo_id_nome.get(a.id_museo,None)
 
-            if museo is not None and museo !="NESSUN_FILTRO":
-                museo_name = museo_id_nome.get(a.id_museo)
-                if museo_name != museo:
-                    value = False
+            if museo is not None and museo_nome != museo:
+                continue
 
-            if epoca is not None and epoca !="NESSUN_FILTRO" and a.epoca != epoca:
-                value = False
+            if epoca is not None and a.epoca != epoca:
+                continue
 
-            if value:
-                artefatti_filtrati.append(a)
+            artefatti_filtrati.append(a)
         #self.artefatti_filtrati = artefatti_filtrati
         return artefatti_filtrati
 
